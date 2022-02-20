@@ -39,6 +39,7 @@
 }
 
 .circle {
+	cursor: pointer;
 	position: absolute;
 	top: 20px;
 	left: 5px;
@@ -107,12 +108,43 @@
 	}
 
   .footer {
-	line-height: 70px;
+	  display: flex;
+	  justify-content: space-between;
+	  width: 100%;
+	  line-height: 70px;
+	  background: white;
+	  height: 50px;
   }
 
+  .active-status > button {
+	background: none;
+	border: none;
+	cursor: pointer;
+  }
+
+  .active-status > button:hover {
+	color: lightgray;
+  }
+
+  .clear-completed {
+	  background: none;
+	  border: none;
+	  margin-right: 10px;
+  }
+
+  .clear-completed:hover {
+	background: none;
+	border: none;
+	color: lightgray;
+}
+
   .items-counter {
-	  text-indent: 20px;
+	  margin-left: 20px;
 	  font-size: 14px;
+  }
+
+  button + button {
+	  margin-left: 20px;
   }
 
   .completed-task {
