@@ -4,6 +4,7 @@ const form = document.querySelector('form');
 const itemsLeft = document.querySelector('.items-left')
 const deleteButtons = [];
 const circles = [];
+const activeStatuses = document.querySelectorAll('.active-status > button');
 
 form.addEventListener("submit", newPost);
 
@@ -44,7 +45,7 @@ function newPost(e) {
     deleteBox();
     circles.push(checkButton);
     checkForCompletion();
-
+    toggleStatus();
 };
 
 
@@ -88,6 +89,44 @@ function checkForCompletion() {
         item.addEventListener("click", function() {
             const ptag = item.parentNode.firstChild;
             ptag.classList.add("completed-task");
+        });
+    })
+}
+
+function toggleStatus() {
+    let children = taskBox.children;
+    activeStatuses.forEach((item, i) => {
+        item.addEventListener("click", function() {
+            if(item.textContent === "All") {
+                for(let i = 0; i < children.length; i++) {
+                    children[i].classList.remove("hidden")
+                }
+            }
+
+            else if(item.textContent === "Completed") {
+                for(let i = 0; i < children.length; i++) {
+                    if(!children[i].firstChild.classList.contains("completed-task")) {
+                        children[i].classList.add("hidden");
+                    }
+
+                    else if(children[i].classList.contains("hidden")) {
+                        children[i].classList.remove("hidden");
+                    }
+
+                }
+            }
+
+            else if(item.textContent === "Active") {
+                for(let i = 0; i < children.length; i++) {
+                    if(children[i].firstChild.classList.contains("completed-task")) {
+                        children[i].classList.add("hidden");
+                    } 
+
+                    else if(children[i].classList.contains("hidden")) {
+                        children[i].classList.remove("hidden");
+                    }
+                }
+            }
         });
     })
 }

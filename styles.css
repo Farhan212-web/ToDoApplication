@@ -127,6 +127,7 @@
   }
 
   .clear-completed {
+	  line-height: 70px;
 	  background: none;
 	  border: none;
 	  margin-right: 10px;
@@ -145,6 +146,10 @@
 
   button + button {
 	  margin-left: 20px;
+  }
+
+  .hidden {
+	  display: none;
   }
 
   .completed-task {
