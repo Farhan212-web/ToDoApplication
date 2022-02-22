@@ -40,6 +40,8 @@ themeStatus.addEventListener("input", function() {
 
         removeButton.classList.add("darkButton");
         mainContainer.style.backgroundColor = "hsl(240, 70%, 26%)";
+        mobileBar.classList.add("boxDark");
+
 
     } else {
         newBox.classList.remove("boxDark");
@@ -58,6 +60,7 @@ themeStatus.addEventListener("input", function() {
 
         removeButton.classList.remove("darkButton");
         mainContainer.style.backgroundColor = "white";
+        mobileBar.classList.remove("boxDark");
     }
 });
 
@@ -235,6 +238,7 @@ function moveStatusBar(x) {
 
         if(themeStatus.value == "2") {
             mobileBar.classList.add("boxDark");
+            mobileBar.firstChild.classList.add("center");
         } 
 
     } else {
@@ -242,6 +246,9 @@ function moveStatusBar(x) {
         if(!bar.contains(statusBar)) {
             bar.appendChild(statusBar);
         }
+
+        statusBar.classList.remove("center");
+
     }
 }
 
