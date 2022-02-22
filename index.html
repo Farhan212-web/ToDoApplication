@@ -24,6 +24,25 @@
         <div class="main-box">
           <div class="header-text">
             <p class="title"> todo </p>
+            
+            <div class="theme-slider">
+              <label for="myrange">THEME</label>
+              <input
+                name="myrange"
+                class="theme-toggle"
+                type="range"
+                min="1"
+                max="2"
+                value="1"
+                step="1"
+              />
+
+              <datalist id="theme-values">
+                <option class = "theme" value="1" label="1">1</option>
+                <option class="theme" value="2" label="2">2</option>  
+              </datalist>
+            </div>
+
             <img src="images/icon-moon.svg" class="moon">
           </div>
 
@@ -45,7 +64,7 @@
 
             <div class="status-bar">
               <div class="active-status">
-                <button>All</button>
+                <button class="toggled">All</button>
                 <button>Active</button>
                 <button>Completed</button>
               </div>

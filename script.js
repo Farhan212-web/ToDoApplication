@@ -9,6 +9,9 @@ const statusBar = document.querySelector('.active-status');
 const removeButton = document.querySelector('.clear-completed');
 const mobileBar = document.querySelector('.mobile-bar');
 const footer = document.querySelector('.footer');
+const themeStatus = document.querySelector('.theme-toggle');
+const backgroundImage = document.querySelector('.bg-image');
+const mainContainer = document.querySelector('body');
 let activeStatus = 0;
 
 form.addEventListener("submit", newPost);
@@ -17,6 +20,46 @@ let x = window.matchMedia('(max-width: 711px)');
 moveStatusBar(x);
 
 x.addListener(moveStatusBar);
+
+themeStatus.addEventListener("input", function() {
+    if(themeStatus.value === "2") {
+        // Dark theme
+        newBox.classList.add("boxDark");
+        let children = taskBox.children;
+
+        for(let i = 0; i < children.length; i++) {
+            children[i].firstChild.classList.add("boxDark");
+        }
+
+        backgroundImage.style.backgroundImage = "url('images/bg-desktop-dark.jpg')"
+        footer.classList.add("boxDark");
+
+        activeStatuses.forEach((item) => {
+            item.classList.add("darkButton");
+        })
+
+        removeButton.classList.add("darkButton");
+        mainContainer.style.backgroundColor = "hsl(240, 70%, 26%)";
+
+    } else {
+        newBox.classList.remove("boxDark");
+        let children = taskBox.children;
+
+        for(let i = 0; i < children.length; i++) {
+            children[i].firstChild.classList.remove("boxDark");
+        }
+
+        backgroundImage.style.backgroundImage = "url('images/bg-desktop-light.jpg')"
+        footer.classList.remove("boxDark");
+
+        activeStatuses.forEach((item) => {
+            item.classList.remove("darkButton");
+        })
+
+        removeButton.classList.remove("darkButton");
+        mainContainer.style.backgroundColor = "white";
+    }
+});
 
 function newPost(e) {
     e.preventDefault();
@@ -38,6 +81,11 @@ function newPost(e) {
 
     task.classList.add("box");
     p.classList.add("toDoBox");
+
+    if(themeStatus.value == "2") {
+        p.classList.add("boxDark");
+    }
+
     checkButton.classList.add("circle");
     deleteButton.classList.add("delete-button");
 
@@ -133,8 +181,14 @@ function toggleStatus() {
     let children = taskBox.children;
     activeStatuses.forEach((item, i) => {
         item.addEventListener("click", function() {
-            activeStatuses[activeStatus].classList.remove("toggled");
-            item.classList.add("toggled");
+
+            if(themeStatus.value == "2") {
+                activeStatuses[activeStatus].classList.remove("toggledDark");
+                item.classList.add("toggledDark");
+            } else {
+                activeStatuses[activeStatus].classList.remove("toggled");
+                item.classList.add("toggled");
+            }
 
             activeStatus = i;
             if(item.textContent === "All") {
@@ -178,6 +232,11 @@ function moveStatusBar(x) {
     if(x.matches) {
         statusBar.parentNode.removeChild(statusBar);
         mobileBar.appendChild(temp);
+
+        if(themeStatus.value == "2") {
+            mobileBar.classList.add("boxDark");
+        } 
+
     } else {
         const bar = document.querySelector('.status-bar');
         if(!bar.contains(statusBar)) {
@@ -185,6 +244,8 @@ function moveStatusBar(x) {
         }
     }
 }
+
+
 
 
 
