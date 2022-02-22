@@ -5,8 +5,18 @@ const itemsLeft = document.querySelector('.items-left')
 const deleteButtons = [];
 const circles = [];
 const activeStatuses = document.querySelectorAll('.active-status > button');
+const statusBar = document.querySelector('.active-status');
+const removeButton = document.querySelector('.clear-completed');
+const mobileBar = document.querySelector('.mobile-bar');
+const footer = document.querySelector('.footer');
+let activeStatus = 0;
 
 form.addEventListener("submit", newPost);
+
+let x = window.matchMedia('(max-width: 711px)');
+moveStatusBar(x);
+
+x.addListener(moveStatusBar);
 
 function newPost(e) {
     e.preventDefault();
@@ -46,15 +56,27 @@ function newPost(e) {
     circles.push(checkButton);
     checkForCompletion();
     toggleStatus();
+
 };
+
+removeButton.addEventListener("click", function() {
+    let children = taskBox.children;
+
+    for(let i = 0; i < children.length; i++) {
+        if(children[i].firstChild.classList.contains("completed-task")) {
+            children[i].parentNode.removeChild(children[i]);
+            i--;
+            itemsLeft.textContent = findNumitems();
+        }
+    }
+});
 
 
 function deleteBox() { 
     deleteButtons.forEach((item, i) => {
         item.addEventListener("click", function() {
             item.parentNode.parentNode.removeChild(item.parentNode);
-            let numTasks = parseInt(itemsLeft.textContent) -1;
-            itemsLeft.textContent = numTasks.toString();
+            itemsLeft.textContent = findNumitems();
         });
     });
 };
@@ -93,14 +115,33 @@ function checkForCompletion() {
     })
 }
 
+function findNumitems() {
+    let children = taskBox.children;
+    let count = 0;
+    for(let i = 0; i < children.length; i++) {
+        if(children[i].classList.contains("hidden")) {
+            continue;
+        }
+
+        count += 1;
+    }
+
+    return count.toString();
+}
+
 function toggleStatus() {
     let children = taskBox.children;
     activeStatuses.forEach((item, i) => {
         item.addEventListener("click", function() {
+            activeStatuses[activeStatus].classList.remove("toggled");
+            item.classList.add("toggled");
+
+            activeStatus = i;
             if(item.textContent === "All") {
                 for(let i = 0; i < children.length; i++) {
                     children[i].classList.remove("hidden")
                 }
+
             }
 
             else if(item.textContent === "Completed") {
@@ -112,7 +153,6 @@ function toggleStatus() {
                     else if(children[i].classList.contains("hidden")) {
                         children[i].classList.remove("hidden");
                     }
-
                 }
             }
 
@@ -127,8 +167,23 @@ function toggleStatus() {
                     }
                 }
             }
+
+            itemsLeft.textContent = findNumitems();
         });
     })
+}
+
+function moveStatusBar(x) {
+    let temp = statusBar;
+    if(x.matches) {
+        statusBar.parentNode.removeChild(statusBar);
+        mobileBar.appendChild(temp);
+    } else {
+        const bar = document.querySelector('.status-bar');
+        if(!bar.contains(statusBar)) {
+            bar.appendChild(statusBar);
+        }
+    }
 }
 
 

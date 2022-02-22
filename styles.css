@@ -34,7 +34,7 @@
 }
 
 .moon {
-	width: 2vw;
+	width: 40px;
 	height: 40px;
 }
 
@@ -91,7 +91,7 @@
 
   .checkCircle {
 	  position: relative;
-	  background: blueviolet;
+	  background: linear-gradient hsl(192, 100%, 67%);
 	  height: 100%;
 	  width: 100%;
 	  border-radius: 50%;
@@ -137,7 +137,11 @@
 	background: none;
 	border: none;
 	color: lightgray;
-}
+  }
+
+  .toggled {
+	  color: gray;
+  }
 
   .items-counter {
 	  margin-left: 20px;
@@ -155,6 +159,32 @@
   .completed-task {
 	  text-decoration: line-through;
 	  color: gray;
+  }
+
+  @media(max-width: 950px) {
+	  .main-box {
+		  width: 55%;
+	  }
+  }
+
+  @media(max-width: 711px) {
+	  /* Mobile and Tablet resolution */
+	  .main-box {
+		  width: 90%;
+	  }
+
+	  .bg-image {
+		background-image: url('images/bg-mobile-light.jpg');
+	  }
+
+	  .mobile-bar {
+		  width: 100%;
+		  margin: 0;
+		  text-align: center;
+		  margin-top: 60px;
+		  height: 70px;
+		  background: white;
+	  }
   }
 
 
