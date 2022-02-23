@@ -98,7 +98,7 @@ function newPost(e) {
     taskBox.appendChild(task);
 
     deleteButtons.push(deleteButton);
-    
+
     let numTask = parseInt(itemsLeft.textContent);
     let totalTasks = numTask + 1;
     itemsLeft.textContent = totalTasks.toString();
@@ -123,7 +123,7 @@ removeButton.addEventListener("click", function() {
 });
 
 
-function deleteBox() { 
+function deleteBox() {
     deleteButtons.forEach((item, i) => {
         item.addEventListener("click", function() {
             item.parentNode.parentNode.removeChild(item.parentNode);
@@ -217,7 +217,7 @@ function toggleStatus() {
                 for(let i = 0; i < children.length; i++) {
                     if(children[i].firstChild.classList.contains("completed-task")) {
                         children[i].classList.add("hidden");
-                    } 
+                    }
 
                     else if(children[i].classList.contains("hidden")) {
                         children[i].classList.remove("hidden");
@@ -239,7 +239,7 @@ function moveStatusBar(x) {
         if(themeStatus.value == "2") {
             mobileBar.classList.add("boxDark");
             mobileBar.firstChild.classList.add("center");
-        } 
+        }
 
     } else {
         const bar = document.querySelector('.status-bar');
