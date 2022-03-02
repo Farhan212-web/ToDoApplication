@@ -1,0 +1,17 @@
+{
+  "name": "todo-application",
+  "version": "1.0.0",
+  "description": "Frontend Mentor challenge",
+  "main": "index.html",
+  "repository": "https://github.com/Farhan212-web/ToDoApplication",
+  "author": "Farhan212-web",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.9.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4"
+  },
+  "scripts": {
+    "lint": "eslint"
+  }
+}
